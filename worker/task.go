@@ -2244,6 +2244,11 @@ loop:
 			return err
 		}
 
+		// If this is not the first split posting list, skip.
+		if pk.HasStartUid {
+			continue
+		}
+
 		// The following optimization speeds up this iteration considerably, because it avoids
 		// the need to run ReadPostingList.
 		if item.UserMeta()&posting.BitEmptyPosting > 0 {
